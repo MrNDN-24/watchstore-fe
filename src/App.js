@@ -1,16 +1,23 @@
-import React from 'react';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+
+//import logo from "./logo.svg";
+import "./App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import SignUpPage from "./pages/SignUpPage";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import Home from "./pages/HomePage";
+
 
 const App = () => {
   return (
-    <div>
-      <Navbar />
-      <div className="content">
-        {/* Nội dung chính của bạn */}
-      </div>
-      <Footer />
-    </div>
+
+    <BrowserRouter>
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/auth/register" element={<SignUpPage />} />
+        <Route path="/auth/login" element={<LoginPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
