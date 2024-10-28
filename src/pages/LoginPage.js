@@ -1,8 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import myImg from "../assets/clock-signin-signup.jpg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const LoginPage = () => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3001/auth/login", { email, password })
+      .then((result) => {
+        console.log(result);
+        navigate("/home");
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
     <div className="container vh-100 d-flex justify-content-center align-items-center">
       <div className="row w-100" style={{ height: "700px" }}>
@@ -26,7 +42,7 @@ const LoginPage = () => {
             <div>
               <h1 className="text-white mb-4 text-center">WELCOME BACK</h1>
               <h1 className="text-white fs-5"></h1>
-              <form style={{ width: "350px" }}>
+              <form style={{ width: "350px" }} onSubmit={handleSubmit}>
                 {/* Email */}
                 <div className="mb-3 text-white">
                   <label htmlFor="email" className="form-label">
@@ -38,6 +54,7 @@ const LoginPage = () => {
                     name="email"
                     className="form-control rounded-0 border-0"
                     style={{ background: "#2A2842", color: "#A6ABB6" }}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 {/* Password */}
@@ -51,6 +68,7 @@ const LoginPage = () => {
                     name="password"
                     className="form-control rounded-0 border-0"
                     style={{ background: "#2A2842", color: "#A6ABB6" }}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
 

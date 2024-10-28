@@ -12,10 +12,10 @@ const SignUpPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3000/register", { name, email, password })
+      .post("http://localhost:3001/auth/register", { name, email, password })
       .then((result) => {
         console.log(result);
-        navigate("/login");
+        navigate("/auth/login");
       })
       .catch((err) => console.log(err));
   };

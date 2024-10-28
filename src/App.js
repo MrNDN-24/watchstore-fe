@@ -1,4 +1,4 @@
-import logo from "./logo.svg";
+//import logo from "./logo.svg";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import SignUpPage from "./pages/SignUpPage";
@@ -11,8 +11,8 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/register" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/register" element={<SignUpPage />} />
+        <Route path="/auth/login" element={<LoginPage />} />
       </Routes>
     </BrowserRouter>
   );
