@@ -1,23 +1,28 @@
-//import logo from "./logo.svg";
+import { Navigate, Route, Routes } from "react-router-dom";
 import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import SignUpPage from "./pages/SignUpPage";
-import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import LoginPage from "./pages/LoginPage";
-import Home from "./pages/HomePage";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Home from "./pages/Home";
+import { useState } from "react";
+import RefrshHandler from "./RefrshHandler";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        {/* Thêm route mặc định redirect đến trang login */}
-        <Route path="/" element={<Navigate to="/auth/login" replace />} />
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-        <Route path="/home" element={<Home />} />
-        <Route path="/auth/register" element={<SignUpPage />} />
-        <Route path="/auth/login" element={<LoginPage />} />
+  const PrivateRoute = ({ element }) => {
+    return isAuthenticated ? element : <Navigate to="/login" />;
+  };
+
+  return (
+    <div className="App">
+      <RefrshHandler setIsAuthenticated={setIsAuthenticated} />
+      <Routes>
+        <Route path="/" element={<Navigate to="/login" />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/home" element={<PrivateRoute element={<Home />} />} />
       </Routes>
-    </BrowserRouter>
+    </div>
   );
 }
 
